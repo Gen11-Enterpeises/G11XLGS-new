@@ -94,7 +94,7 @@
 
         <div id="adminGate" class="mt-24">
           <form id="adminLoginForm">
-            <div class="field"><label for="adminUser">Admin username</label><input id="adminUser" type="text" autocomplete="username"></div>
+            <div class="field"><label for="adminUser">Admin email</label><input id="adminUser" type="email" autocomplete="username"></div>
             <div class="field"><label for="adminPass">Password</label><input id="adminPass" type="password" autocomplete="current-password"></div>
             <button type="submit" class="btn btn-primary btn-block magnetic"><span>Sign in →</span></button>
             <p id="loginError" class="small mt-16" style="display:none;color:#B54747;line-height:1.6;"></p>
@@ -105,6 +105,7 @@
           <form id="postForm">
             <div class="field"><label for="postTitle">Title</label><input id="postTitle" type="text" required></div>
             <div class="field"><label for="postMessage">Message</label><textarea id="postMessage" required></textarea></div>
+            <div class="field"><label for="postFile">Attach a file (optional)</label><input id="postFile" type="file"></div>
             <button type="submit" class="btn btn-primary btn-block magnetic"><span>Publish announcement →</span></button>
           </form>
           <button id="adminLogout" class="btn btn-outline btn-block mt-16"><span>Sign out</span></button>
@@ -113,8 +114,6 @@
     </div>
   </div>
 </section>
-
-
 
 <footer class="footer">
   <div class="orbit-field" aria-hidden="true">
@@ -172,7 +171,6 @@
 <div class="back-top" aria-label="Back to top">
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
 </div>
-
 
 <script>document.getElementById('year') && (document.getElementById('year').textContent = new Date().getFullYear());</script>
 <script src="assets/js/main.js"></script>
