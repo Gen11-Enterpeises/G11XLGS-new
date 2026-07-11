@@ -19,7 +19,7 @@
     {
       id: 'seed-2',
       title: 'Term I Examination Schedule Released',
-      message: 'The Term I examination timetable for Grades VI–XII has been shared with class teachers. Please check your child\\'s diary for the detailed schedule.',
+      message: 'The Term I examination timetable for Grades VI–XII has been shared with class teachers. Please check the diary of your child for the detailed schedule.',
       ts: Date.now() - 1000*60*60*24*6
     },
     {
