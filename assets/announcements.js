@@ -81,8 +81,9 @@ async function loadAnnouncements() {
   const { data, error } = await supabaseClient
     .from('documents')
     .select('*')
+    .neq('file_type', 'picture')
     .order('created_at', { ascending: false })
-
+  
   if (error) {
     console.error(error)
     return
