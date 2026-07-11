@@ -1,5 +1,14 @@
 let currentSession = null
 
+const IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg', '.bmp']
+
+function looksLikeImage(item) {
+  if (item.file_type === 'picture') return true
+  if (!item.file_url) return false
+  const url = item.file_url.toLowerCase()
+  return IMAGE_EXTENSIONS.some(ext => url.includes(ext))
+}
+
 async function checkSession() {
   const { data } = await supabaseClient.auth.getSession()
   currentSession = data.session
@@ -84,7 +93,6 @@ async function loadPhotos() {
   const { data, error } = await supabaseClient
     .from('documents')
     .select('*')
-    .eq('file_type', 'picture')
     .order('created_at', { ascending: false })
 
   if (error) {
@@ -92,8 +100,10 @@ async function loadPhotos() {
     return
   }
 
+  const photos = data.filter(looksLikeImage)
+
   const container = document.getElementById('file-list')
-  container.innerHTML = data.map(file => {
+  container.innerHTML = photos.map(file => {
     const cat = file.category || 'campus'
     return `
     <figure class="gallery-item" data-cat="${cat}" data-reveal>
