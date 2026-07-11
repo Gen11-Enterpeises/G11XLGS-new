@@ -106,7 +106,7 @@ async function loadPhotos() {
   container.innerHTML = photos.map(file => {
     const cat = file.category || 'campus'
     return `
-    <figure class="gallery-item" data-cat="${cat}" data-reveal>
+    <figure class="gallery-item" data-cat="${cat}" >
       <button data-lightbox="${file.file_url}" data-caption="${file.title}" style="all:unset;cursor:pointer;display:block;width:100%;">
         <img src="${file.file_url}" alt="${file.title}" loading="lazy">
         <figcaption>
