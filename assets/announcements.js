@@ -89,16 +89,38 @@ async function loadAnnouncements() {
   }
 
   const list = document.getElementById('announceList')
-  list.innerHTML = data.map(item => `
+  list.innerHTML = data.map(item => {
+    const safeTitle = (item.title || '').replace(/'/g, "\\'").replace(/"/g, '&quot;')
+    return `
     <div class="glass" style="padding:20px;margin-bottom:16px;">
       <h4>${item.title}</h4>
       ${item.description ? `<p>${item.description}</p>` : ''}
       ${item.file_url ? (item.file_type === 'picture'
         ? `<img src="${item.file_url}" style="max-width:200px;border-radius:8px;margin-top:8px;">`
         : `<a href="${item.file_url}" target="_blank">Download attachment</a>`) : ''}
-      ${currentSession ? `<div class="mt-16"><button onclick="deleteItem('${item.id}')" class="btn btn-outline btn-sm">Delete</button></div>` : ''}
+      ${currentSession ? `<div class="mt-16" style="display:flex;gap:10px;">
+        <button onclick="editItem('${item.id}', '${safeTitle}')" class="btn btn-outline btn-sm">Edit</button>
+        <button onclick="deleteItem('${item.id}')" class="btn btn-outline btn-sm">Delete</button>
+      </div>` : ''}
     </div>
-  `).join('')
+  `
+  }).join('')
+}
+
+async function editItem(id, currentTitle) {
+  const newTitle = prompt('Edit title:', currentTitle)
+  if (newTitle === null || newTitle.trim() === '') return
+
+  const { error } = await supabaseClient
+    .from('documents')
+    .update({ title: newTitle })
+    .eq('id', id)
+
+  if (error) {
+    alert('Update failed: ' + error.message)
+    return
+  }
+  loadAnnouncements()
 }
 
 async function deleteItem(id) {
