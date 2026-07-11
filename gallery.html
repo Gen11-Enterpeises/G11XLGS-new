@@ -78,6 +78,39 @@
 
 <section>
   <div class="container">
+    <div class="glass" style="padding:28px;margin-bottom:36px;max-width:520px;">
+      <span class="tag" id="adminBadge" style="display:none;">Admin session</span>
+      <h3 class="mt-8">Manage gallery photos</h3>
+      <p class="small muted mt-8">Only school administrators can add or remove photos.</p>
+
+      <div id="adminGate" class="mt-24">
+        <form id="adminLoginForm">
+          <div class="field"><label for="adminUser">Admin email</label><input id="adminUser" type="email" autocomplete="username"></div>
+          <div class="field"><label for="adminPass">Password</label><input id="adminPass" type="password" autocomplete="current-password"></div>
+          <button type="submit" class="btn btn-primary btn-block magnetic"><span>Sign in →</span></button>
+          <p id="loginError" class="small mt-16" style="display:none;color:#B54747;line-height:1.6;"></p>
+        </form>
+      </div>
+
+      <div id="composer" style="display:none;" class="mt-24">
+        <form id="uploadForm">
+          <div class="field"><label for="photoTitle">Title / caption</label><input id="photoTitle" type="text" required></div>
+          <div class="field"><label for="photoCategory">Category</label>
+            <select id="photoCategory">
+              <option value="campus">Campus</option>
+              <option value="academics">Academics</option>
+              <option value="campus-life">Campus Life</option>
+              <option value="sports">Sports</option>
+              <option value="people">People</option>
+            </select>
+          </div>
+          <div class="field"><label for="photoFile">Photo</label><input id="photoFile" type="file" accept="image/*" required></div>
+          <button type="submit" class="btn btn-primary btn-block magnetic"><span>Upload photo →</span></button>
+        </form>
+        <button id="adminLogout" class="btn btn-outline btn-block mt-16"><span>Sign out</span></button>
+      </div>
+    </div>
+
     <div class="pill-row" data-filter-group=".gallery-item">
       <button class="pill active" data-filter="all">All</button>
       <button class="pill" data-filter="campus">Campus</button>
@@ -143,8 +176,6 @@
     </figure>
     <div id="file-list" style="display:contents;"></div>
     </div>
-   
-    
   </div>
 </section>
 
@@ -153,7 +184,7 @@
 .gallery-item{ margin:0 0 22px; break-inside:avoid; border-radius:20px; overflow:hidden; position:relative; box-shadow:var(--shadow-1); }
 .gallery-item img{ width:100%; display:block; transition:transform .6s var(--ease); }
 .gallery-item:hover img{ transform:scale(1.08); }
-.gallery-item figcaption{ position:absolute; left:14px; bottom:14px; }
+.gallery-item figcaption{ position:absolute; left:14px; bottom:14px; display:flex; align-items:center; gap:8px; }
 @media (max-width:760px){ .masonry{ columns:1 100%; } }
 </style>
 
@@ -222,7 +253,6 @@
 <div class="back-top" aria-label="Back to top">
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
 </div>
-<div id="file-list"></div>
 
 <script>document.getElementById('year') && (document.getElementById('year').textContent = new Date().getFullYear());</script>
 <script src="assets/js/main.js"></script>
