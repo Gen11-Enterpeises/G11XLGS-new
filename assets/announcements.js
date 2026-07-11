@@ -61,7 +61,9 @@ document.getElementById('postForm').addEventListener('submit', async (e) => {
       .getPublicUrl(fileName)
 
     file_url = urlData.publicUrl
-    file_type = file.type.startsWith('image') ? 'picture' : 'document'
+    // Announcements attachments are tagged 'document' even if it's an image file,
+    // so they never get pulled into the gallery feed (which only looks for 'picture').
+    file_type = 'document'
   }
 
   const { error: insertError } = await supabaseClient
@@ -83,7 +85,7 @@ async function loadAnnouncements() {
     .select('*')
     .neq('file_type', 'picture')
     .order('created_at', { ascending: false })
-  
+
   if (error) {
     console.error(error)
     return
@@ -96,9 +98,7 @@ async function loadAnnouncements() {
     <div class="glass" style="padding:20px;margin-bottom:16px;">
       <h4>${item.title}</h4>
       ${item.description ? `<p>${item.description}</p>` : ''}
-      ${item.file_url ? (item.file_type === 'picture'
-        ? `<img src="${item.file_url}" style="max-width:200px;border-radius:8px;margin-top:8px;">`
-        : `<a href="${item.file_url}" target="_blank">Download attachment</a>`) : ''}
+      ${item.file_url ? `<a href="${item.file_url}" target="_blank">Download attachment</a>` : ''}
       ${currentSession ? `<div class="mt-16" style="display:flex;gap:10px;">
         <button onclick="editItem('${item.id}', '${safeTitle}')" class="btn btn-outline btn-sm">Edit</button>
         <button onclick="deleteItem('${item.id}')" class="btn btn-outline btn-sm">Delete</button>
