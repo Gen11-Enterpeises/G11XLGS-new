@@ -22,8 +22,8 @@
    ========================================================================== */
 
 window.LGS_EMAILJS = {
-  PUBLIC_KEY:             "YOUR_PUBLIC_KEY",           // EmailJS -> Account -> API Keys
-  SERVICE_ID:             "YOUR_SERVICE_ID",            // EmailJS -> Email Services
+  PUBLIC_KEY:             "bFL_v7_fcoJjXxknj",           // EmailJS -> Account -> API Keys
+  SERVICE_ID:             "service_n3z6ao3",            // EmailJS -> Email Services
   CONTACT_TEMPLATE_ID:    "YOUR_CONTACT_TEMPLATE_ID",   // EmailJS -> Email Templates (Contact form)
   ADMISSION_TEMPLATE_ID:  "YOUR_ADMISSION_TEMPLATE_ID", // EmailJS -> Email Templates (Admissions form)
   TO_EMAIL:               "info@lingaschool.org"
