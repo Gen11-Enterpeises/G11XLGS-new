@@ -169,7 +169,7 @@ section{ position:relative; padding:clamp(70px,10vw,140px) 0; }
 .mobile-panel.open{ transform:translateY(0); }
 .mobile-panel a{ display:block; font-family:var(--f-display); font-size:26px; padding:14px 0; border-bottom:1px solid var(--line); }
 
-@media (max-width: 980px){
+@media (max-width: 1300px){
   .nav-links{ display:none; }
   .nav-burger{ display:flex; }
 }
